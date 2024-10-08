@@ -109,6 +109,13 @@ elif chart_type == "Pie Charts":
     ax1.pie(worktype_counts, labels=worktype_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette("pastel"))
     ax1.set_title('Work Type Distribution')
     st.pyplot(fig1)
+    st.write("""
+    **Work Type Distribution**:
+    This pie chart illustrates the proportion of different types of employment among the dataset's participants. 
+    The categories may include "Private," "Self-employed," "Government job," and "Children." The chart provides a visual 
+    summary of how different work types are represented, which could help in understanding whether certain occupations 
+    correlate with a higher risk of stroke.
+    """)
 
     # Residence Type Pie Chart
     residence_counts = data['Residence_type'].value_counts(dropna=False)
@@ -116,6 +123,12 @@ elif chart_type == "Pie Charts":
     ax2.pie(residence_counts, labels=residence_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette("pastel"))
     ax2.set_title('Residence Type Distribution')
     st.pyplot(fig2)
+    st.write("""
+    **Residence Type Distribution**:
+    This pie chart represents the distribution of participants based on their residence type, categorized as "Urban" or "Rural." 
+    Understanding whether individuals from rural or urban areas are more prevalent in the dataset might offer insights into how 
+    environmental factors contribute to stroke risks.
+    """)
 
     # Age Category Pie Chart
     age_bins = pd.cut(data['age'], bins=[0, 18, 35, 50, 65, 80, 100])
@@ -124,6 +137,12 @@ elif chart_type == "Pie Charts":
     ax3.pie(age_group_counts, labels=age_group_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette("pastel"))
     ax3.set_title('Age Group Distribution')
     st.pyplot(fig3)
+    st.write("""
+    **Age Group Distribution**:
+    The Age Group pie chart divides participants into several age brackets, such as 0-18, 19-35, 36-50, 51-65, 66-80, and 81-100. 
+    This chart visually captures the proportion of individuals in different age groups, which can be important for identifying 
+    whether strokes are more common in specific age ranges.
+    """)
 
 # Conclusion Section
 st.header('Conclusion')
