@@ -110,11 +110,11 @@ elif chart_type == "Pie Charts":
     ax1.set_title('Work Type Distribution')
     st.pyplot(fig1)
     st.write("""
-    **Work Type Distribution**:
-    This pie chart illustrates the proportion of different types of employment among the dataset's participants. 
-    The categories may include "Private," "Self-employed," "Government job," and "Children." The chart provides a visual 
-    summary of how different work types are represented, which could help in understanding whether certain occupations 
-    correlate with a higher risk of stroke.
+    **Insights**: 
+    This pie chart shows the distribution of different work types among the participants. The majority of the dataset may fall 
+    under categories such as "Private," "Self-employed," or "Government Job." Understanding the distribution of work types 
+    can help analyze whether certain occupational groups are more susceptible to stroke, as work environments and lifestyles 
+    may play a role in health outcomes.
     """)
 
     # Residence Type Pie Chart
@@ -124,10 +124,10 @@ elif chart_type == "Pie Charts":
     ax2.set_title('Residence Type Distribution')
     st.pyplot(fig2)
     st.write("""
-    **Residence Type Distribution**:
-    This pie chart represents the distribution of participants based on their residence type, categorized as "Urban" or "Rural." 
-    Understanding whether individuals from rural or urban areas are more prevalent in the dataset might offer insights into how 
-    environmental factors contribute to stroke risks.
+    **Insights**: 
+    This pie chart displays the proportion of participants living in urban or rural areas. This distinction is crucial, as 
+    healthcare access, lifestyle, and environmental factors differ between rural and urban areas. Analyzing this data might 
+    uncover whether living in a particular type of residence is correlated with an increased risk of stroke.
     """)
 
     # Age Category Pie Chart
@@ -138,10 +138,10 @@ elif chart_type == "Pie Charts":
     ax3.set_title('Age Group Distribution')
     st.pyplot(fig3)
     st.write("""
-    **Age Group Distribution**:
-    The Age Group pie chart divides participants into several age brackets, such as 0-18, 19-35, 36-50, 51-65, 66-80, and 81-100. 
-    This chart visually captures the proportion of individuals in different age groups, which can be important for identifying 
-    whether strokes are more common in specific age ranges.
+    **Insights**: 
+    The Age Group pie chart segments the dataset into age groups, such as children, young adults, middle-aged, and older adults. 
+    Since age is a key risk factor for stroke, this chart helps visualize which age groups are most prevalent in the dataset. 
+    It can aid in determining if strokes are more common in older populations, as expected, or if any younger age groups show unexpected trends.
     """)
 
 # Conclusion Section
