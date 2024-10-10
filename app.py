@@ -261,11 +261,11 @@ elif chart_type == "Pie Charts":
     colors = ['#a7bed3', '#dab894']
 
     # Create subplots for the two pie charts
-    fig, axes = plt.subplots(1, 2, figsize=(12, 6))
+    fig, axes = plt.subplots(1, 2, figsize=(8, 15))
 
     # Pie chart for individuals living in urban areas
     axes[0].pie([urban_stroke_percent, urban_no_stroke_percent], labels=labels, autopct='%1.1f%%', startangle=90, colors=colors)
-    axes[0].set_title('Stroke Distribution for Individuals Living in Urban Areas')
+    axes[0].set_title('Stroke Distribution for Individuals Living in Urban Areas\n\n')
 
     # Pie chart for individuals living in rural areas
     axes[1].pie([rural_stroke_percent, rural_no_stroke_percent], labels=labels, autopct='%1.1f%%', startangle=90, colors=colors)
@@ -293,7 +293,7 @@ elif chart_type == "Pie Charts":
     colors = ['#f1ffc4', '#ffcaaf']
 
     # Create subplots for the two pie charts
-    fig, axes = plt.subplots(1, 2, figsize=(12, 6))
+    fig, axes = plt.subplots(1, 2, figsize=(8, 15))
 
     # Pie chart for individuals with hypertension
     axes[0].pie([stroke_yes, no_stroke_yes], labels=labels, autopct='%1.1f%%', startangle=90, colors=colors)
@@ -325,11 +325,11 @@ elif chart_type == "Pie Charts":
     colors = ['#d0d0fe', '#f9deff']
 
     # Create subplots for the two pie charts
-    fig, axes = plt.subplots(1, 2, figsize=(12, 6))
+    fig, axes = plt.subplots(1, 2, figsize=(8, 15))
 
     # Pie chart for individuals with heart disease
     axes[0].pie([stroke_yes, no_stroke_yes], labels=labels, autopct='%1.1f%%', startangle=90, colors=colors)
-    axes[0].set_title('Stroke Distribution for individuals with unhealthy heart')
+    axes[0].set_title('Stroke Distribution for individuals with unhealthy heart\n\n')
 
     # Pie chart for individuals without heart disease
     axes[1].pie([stroke_no, no_stroke_no], labels=labels, autopct='%1.1f%%', startangle=90, colors=colors)
@@ -354,7 +354,7 @@ elif chart_type == "Pie Charts":
     colors = ['#fb6f92', '#f6d7e8']
 
     # Create subplots for pie charts by gender
-    fig, axes = plt.subplots(1, 2, figsize=(18, 6))
+    fig, axes = plt.subplots(1, 2, figsize=(8, 15))
 
     # Pie chart for Female individuals
     axes[0].pie([stroke_female, no_stroke_female], labels=labels, autopct='%1.1f%%', startangle=90, colors=colors)
@@ -466,7 +466,7 @@ elif chart_type == "Pie Charts":
     colors = ['#fac3a5', '#cb8d9a']
 
     # Create subplots for the pie charts
-    fig, axes = plt.subplots(1, 3, figsize=(12, 6))
+    fig, axes = plt.subplots(1, 3, figsize=(8,15))
 
     # Pie chart for each smoking status
     axes[0].pie(formerly_smoked_percentages, labels=labels, autopct='%1.1f%%', startangle=90, colors=colors)
@@ -513,11 +513,11 @@ elif chart_type == "Pie Charts":
 
     # Pie chart for individuals who have ever been married
     axes[0].pie([married_stroke_percent, married_no_stroke_percent], labels=labels, autopct='%1.1f%%', startangle=90, colors=colors)
-    axes[0].set_title('Stroke Distribution for Ever Married Individuals')
+    axes[0].set_title('Stroke Distribution for Married Individuals\n')
 
     # Pie chart for individuals who have never been married
     axes[1].pie([not_married_stroke_percent, not_married_no_stroke_percent], labels=labels, autopct='%1.1f%%', startangle=90, colors=colors)
-    axes[1].set_title('Stroke Distribution for Never Married Individuals')
+    axes[1].set_title('Stroke Distribution for Not Married Individuals')
 
     # Adjust layout
     plt.tight_layout()
