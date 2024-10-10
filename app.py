@@ -59,11 +59,13 @@ if chart_type == "Distributions of Age, Glucose, and BMI":
     ax[0].set_ylabel('Frequency')
 
     st.write("""
-    **Insights**:
-    The Age Distribution histogram illustrates the range of ages among the dataset participants, highlighting the crucial role of age in stroke risk assessment. 
-    As age is a key risk factor for strokes, this visualization pinpoint the age groups that are most vulnerable. The chart reveals a notable rise in 
-    frequency from younger to middle ages, peaking in the middle-aged demographic, before gradually tapering off among the elderly. This pattern underscores a 
-    significant presence of middle-aged and elderly individuals within the dataset, emphasizing the importance of focusing on these age groups for stroke prevention and prediction efforts.
+    **Insights**:\n
+    Age Distribution:
+
+    The age histogram shows a broad distribution with a notable concentration of individuals in their 50s and 60s. 
+    The frequency of younger age groups (below 30) appears considerably lower, indicating that the dataset primarily
+    includes middle-aged and elderly individuals. This distribution suggests that middle-aged and elderly groups are 
+    a key demographic for analyzing stroke risk, reflecting known epidemiological data that stroke risk increases with age.
     """)
 
     # Glucose Level Distribution
@@ -73,12 +75,12 @@ if chart_type == "Distributions of Age, Glucose, and BMI":
     ax[1].set_ylabel('Frequency')
 
     st.write(""" 
-    **Insights**:
-    The Average Glucose Level Distribution histogram displays the distribution of average glucose levels among the participants. 
-    High glucose levels are a risk factor for stroke, and this chart identify individuals with elevated glucose levels. 
-    The distribution reveal whether the dataset contains a significant number of individuals with high glucose levels, 
-    which could indicate a higher risk of stroke in the population. The peak near the normal glucose range, with a tail extending towards higher values, 
-    suggests that while most individuals have glucose levels within a normal range, a subset has elevated levels which are a risk factor for diabetes and potentially stroke.
+    Average Glucose Level Distribution:
+
+    The histogram for glucose levels is skewed left, with a high concentration of individuals in the 50 to 125 mg/dL 
+    range, peaking around 75 to 100 mg/dL. The left skewness indicates a subset of the population with higher 
+    glucose levels, which could be an indicator of diabetes or prediabetes conditions, both of which are risk 
+    factors for stroke.
     """)
 
     # BMI Distribution
@@ -87,6 +89,13 @@ if chart_type == "Distributions of Age, Glucose, and BMI":
     ax[2].set_xlabel('BMI')
     ax[2].set_ylabel('Frequency')
 
+    st.write("""
+    BMI Distribution:
+
+    The BMI distribution is prominently left-skewed, with the highest frequency around the 25 to 30 range, 
+    categorizing this peak within the overweight classification. The tail extending towards higher BMI values 
+    indicates the presence of a significant number of obese individuals, which is another important stroke risk factor.
+             """)
     st.pyplot(fig)
 
 # Box Plots for Age, Average Glucose Level, and BMI
@@ -139,6 +148,19 @@ elif chart_type == "Correlation Matrix":
     fig, ax = plt.subplots(figsize=(10, 8))
     sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f', ax=ax)
     st.pyplot(fig)
+    st.write(""" 
+    The correlation matrix provided visualizes the relationships between various health-related variables, 
+             indicating several notable associations. Age shows moderate positive correlations with stroke, 
+             hypertension, and heart disease, suggesting that as individuals age, their risk for these conditions 
+             tends to increase. Interestingly, average glucose levels also show a mild positive correlation with 
+             stroke, indicating that higher glucose levels might be linked to an increased risk of stroke. Notably, 
+             body mass index (BMI) shows very little to no correlation with stroke or heart disease, suggesting 
+             that in this dataset, BMI alone is not a significant direct indicator of these conditions. The matrix 
+             uses a color gradient from deep red to deep blue to represent the strength of correlation from strong 
+             positive to strong negative, respectively, with neutral correlations appearing closer to white. Overall, 
+             this matrix is a valuable tool for identifying and understanding potential risk factors in healthcare, 
+             potentially aiding in predictive modeling and risk assessment.
+""")
 
 # Pie Charts for Worktype, Residence Type, and Age
 elif chart_type == "Pie Charts":
@@ -146,9 +168,23 @@ elif chart_type == "Pie Charts":
 
     # Worktype Pie Chart
     worktype_counts = data['work_type'].value_counts(dropna=False)
+
     fig1, ax1 = plt.subplots()
-    ax1.pie(worktype_counts, labels=worktype_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette("pastel"))
+    wedges, texts, autotexts = ax1.pie(worktype_counts, autopct='%1.1f%%', startangle=90, colors=sns.color_palette("pastel"))
+
+    # Set title for the pie chart
     ax1.set_title('Work Type Distribution')
+
+    # Improve legibility of autopct labels
+    plt.setp(autotexts, size=8, weight="bold", color="white")  # Adjust the color to white for better visibility on pastel colors
+
+    # Create a legend with labels placed in a similar manner to your example
+    ax1.legend(wedges, [f'{label}, {prop*100:.1f}%' for label, prop in zip(worktype_counts.index, worktype_counts/worktype_counts.sum())],
+            title="Work Type",
+            loc="center left",
+            bbox_to_anchor=(1, 0, 0.5, 1))
+
+    plt.tight_layout()  # Adjust layout to make room for the legend
     st.pyplot(fig1)
 
     st.write("""
@@ -172,12 +208,26 @@ elif chart_type == "Pie Charts":
     uncover whether living in a particular type of residence is correlated with an increased risk of stroke.
     """)
 
-    # Age Category Pie Chart
+    # Define age bins
     age_bins = pd.cut(data['age'], bins=[0, 18, 35, 50, 65, 80, 100])
     age_group_counts = age_bins.value_counts(sort=False)
+
     fig3, ax3 = plt.subplots()
-    ax3.pie(age_group_counts, labels=age_group_counts.index, autopct='%1.1f%%', startangle=90, colors=sns.color_palette("pastel"))
+    wedges, texts, autotexts = ax3.pie(age_group_counts, autopct='%1.1f%%', startangle=90, colors=sns.color_palette("pastel"))
+
+    # Set title for the pie chart
     ax3.set_title('Age Group Distribution')
+
+    # Improve legibility of autopct labels
+    plt.setp(autotexts, size=8, weight="bold", color="white")  # Adjust the color to white for better visibility on pastel colors
+
+    # Create a legend with labels and their respective percentages
+    ax3.legend(wedges, [f'{label}, {prop*100:.1f}%' for label, prop in zip(age_group_counts.index, age_group_counts/age_group_counts.sum())],
+            title="Age Groups",
+            loc="center left",
+            bbox_to_anchor=(1, 0, 0.5, 1))
+
+    plt.tight_layout()  # Adjust layout to make room for the legend
     st.pyplot(fig3)
     st.write("""
     **Insights**: 
@@ -189,6 +239,7 @@ elif chart_type == "Pie Charts":
     #Stroke Distribution for Individuals Living in Urban Areas and Rural Areas
     # Calculate stroke and non-stroke counts for urban and rural residents
     # Calculate stroke and non-stroke counts for urban and rural residents
+    st.subheader('Stroke Distribution for Individuals Living in Urban Areas and Rural Areas')
     urban_stroke_count = data[(data['stroke'] == 1) & (data['Residence_type'] == 'Urban')].shape[0]
     urban_no_stroke_count = data[(data['stroke'] == 0) & (data['Residence_type'] == 'Urban')].shape[0]
 
@@ -207,7 +258,7 @@ elif chart_type == "Pie Charts":
 
     # Prepare data for pie charts
     labels = ['Stroke', 'No Stroke']
-    colors = ['#fe346e', '#512b58']
+    colors = ['#a7bed3', '#dab894']
 
     # Create subplots for the two pie charts
     fig, axes = plt.subplots(1, 2, figsize=(12, 6))
@@ -226,6 +277,7 @@ elif chart_type == "Pie Charts":
 
     # Hypertension and Stroke Pie Charts
     # Prepare data for pie charts
+    st.subheader('Pie Chart for Individuals with Hypertension and Stroke')
     hyper_stroke_counts = data.groupby(['hypertension', 'stroke']).size().unstack()
 
     # Calculate percentages for visualization
@@ -238,7 +290,7 @@ elif chart_type == "Pie Charts":
     no_stroke_no = hyper_stroke_counts.loc[0, 0]
 
     labels = ['Stroke', 'No Stroke']
-    colors = ['#fe346e', '#512b58']
+    colors = ['#f1ffc4', '#ffcaaf']
 
     # Create subplots for the two pie charts
     fig, axes = plt.subplots(1, 2, figsize=(12, 6))
@@ -257,6 +309,7 @@ elif chart_type == "Pie Charts":
 
     #Stroke Distribution for individuals with unhealthy and healthy heart
         # Prepare data for pie charts
+    st.subheader('Stroke Distribution for individuals with unhealthy and healthy heart')
     hyper_stroke_counts = data.groupby(['heart_disease', 'stroke']).size().unstack()
 
     # Calculate percentages for visualization
@@ -269,7 +322,7 @@ elif chart_type == "Pie Charts":
     no_stroke_no = hyper_stroke_counts.loc[0, 0]
 
     labels = ['Stroke', 'No Stroke']
-    colors = ['#fe346e', '#512b58']
+    colors = ['#d0d0fe', '#f9deff']
 
     # Create subplots for the two pie charts
     fig, axes = plt.subplots(1, 2, figsize=(12, 6))
@@ -288,6 +341,7 @@ elif chart_type == "Pie Charts":
 
     #Stroke Distribution for Female and Male Individuals
     # Stroke counts for each gender
+    st.subheader('Stroke Distribution for Female and Male Individuals')
     stroke_female = data[data['gender'] == 'Female']['stroke'].sum()
     no_stroke_female = data[data['gender'] == 'Female']['stroke'].count() - stroke_female
 
@@ -297,7 +351,7 @@ elif chart_type == "Pie Charts":
 
     # Labels and colors
     labels = ['Stroke', 'No Stroke']
-    colors = ['#fe346e', '#512b58']
+    colors = ['#fb6f92', '#f6d7e8']
 
     # Create subplots for pie charts by gender
     fig, axes = plt.subplots(1, 2, figsize=(18, 6))
@@ -316,6 +370,7 @@ elif chart_type == "Pie Charts":
 
     #Stroke Distribution for individuals for each worktype
     # Calculate stroke and non-stroke counts for each work type
+    st.subheader('Stroke Distribution for Individuals for Each Work Type')
     govt_stroke_count = data[(data['stroke'] == 1) & (data['work_type'] == 'Govt_job')].shape[0]
     govt_no_stroke_count = data[(data['stroke'] == 0) & (data['work_type'] == 'Govt_job')].shape[0]
 
@@ -346,7 +401,7 @@ elif chart_type == "Pie Charts":
 
     # Prepare data for pie charts
     labels = ['Stroke', 'No Stroke']
-    colors = ['#fe346e', '#512b58']
+    colors = ['#c7ceea', '#f28ece']
 
     # Create subplots for the pie charts
     fig, axes = plt.subplots(1, 5, figsize=(12, 6))
@@ -375,6 +430,7 @@ elif chart_type == "Pie Charts":
     #Stroke Distribution for individuals with different smoking status
     # Calculate stroke and non-stroke counts for each smoking status
     # Calculate stroke and non-stroke counts for each smoking status
+    st.subheader('Stroke Distribution for Individuals with Different Smoking Status')
     formerly_smoked_stroke_count = data[(data['stroke'] == 1) & (data['smoking_status'] == 'formerly smoked')].shape[0]
     formerly_smoked_no_stroke_count = data[(data['stroke'] == 0) & (data['smoking_status'] == 'formerly smoked')].shape[0]
 
@@ -407,7 +463,7 @@ elif chart_type == "Pie Charts":
 
     # Prepare data for pie charts
     labels = ['Stroke', 'No Stroke']
-    colors = ['#fe346e', '#512b58']
+    colors = ['#fac3a5', '#cb8d9a']
 
     # Create subplots for the pie charts
     fig, axes = plt.subplots(1, 3, figsize=(12, 6))
@@ -427,11 +483,55 @@ elif chart_type == "Pie Charts":
     plt.tight_layout()
     st.pyplot(fig)
 
+
+    # Total counts for each marital status
+    st.subheader('Stroke Distribution for Individuals according to Marital Status')
+    # Calculate stroke and non-stroke counts for each marital status
+    married_stroke_count = data[(data['stroke'] == 1) & (data['ever_married'] == 'Yes')].shape[0]
+    married_no_stroke_count = data[(data['stroke'] == 0) & (data['ever_married'] == 'Yes')].shape[0]
+
+    not_married_stroke_count = data[(data['stroke'] == 1) & (data['ever_married'] == 'No')].shape[0]
+    not_married_no_stroke_count = data[(data['stroke'] == 0) & (data['ever_married'] == 'No')].shape[0]
+
+    # Calculate total counts for both groups
+    total_married = married_stroke_count + married_no_stroke_count
+    total_not_married = not_married_stroke_count + not_married_no_stroke_count
+
+    # Calculate percentages for married and not married individuals
+    married_stroke_percent = (married_stroke_count / total_married) * 100
+    married_no_stroke_percent = (married_no_stroke_count / total_married) * 100
+
+    not_married_stroke_percent = (not_married_stroke_count / total_not_married) * 100
+    not_married_no_stroke_percent = (not_married_no_stroke_count / total_not_married) * 100
+
+    # Prepare data for pie charts
+    labels = ['Stroke', 'No Stroke']
+    colors = ['#f1ffc4', '#ffcaaf']
+
+    # Create subplots for the two pie charts
+    fig, axes = plt.subplots(1, 2, figsize=(8,15))
+
+    # Pie chart for individuals who have ever been married
+    axes[0].pie([married_stroke_percent, married_no_stroke_percent], labels=labels, autopct='%1.1f%%', startangle=90, colors=colors)
+    axes[0].set_title('Stroke Distribution for Ever Married Individuals')
+
+    # Pie chart for individuals who have never been married
+    axes[1].pie([not_married_stroke_percent, not_married_no_stroke_percent], labels=labels, autopct='%1.1f%%', startangle=90, colors=colors)
+    axes[1].set_title('Stroke Distribution for Never Married Individuals')
+
+    # Adjust layout
+    plt.tight_layout()
+    st.pyplot(fig)
 # Conclusion Section
 st.header('Conclusion')
 st.write("""
-From the visualizations and descriptive statistics, we can observe the following trends:
-- Age, average glucose level, and BMI have varying distributions, with older age and higher glucose levels possibly correlating with stroke incidents.
-- The box plots further show the relationship between these factors and stroke status, indicating potential trends.
-- Further model-building and analysis can help explore these relationships in more detail, particularly when building predictive models using TensorFlow or other machine learning libraries.
+From the visualizations and descriptive statistics, several trends are noticeable. Age, average glucose levels, 
+    and BMI exhibit diverse distributions, where older age groups and higher glucose levels appear to 
+    correlate with increased stroke incidents. The box plots further elucidate the relationship between these 
+    factors and stroke occurrence, highlighting potential trends that could be instrumental for deeper analysis. 
+    Model-building and further analytical exploration, especially using tools like TensorFlow or other machine 
+    learning libraries, could significantly enhance our understanding of these relationships. Overall, 
+    the data suggests that health conditions such as hypertension and heart health, alongside lifestyle 
+    choices like smoking, are major influencers of stroke risk. However, demographic factors like gender 
+    and marital status also play a role, albeit to a lesser extent.
 """)
