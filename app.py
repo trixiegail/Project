@@ -30,6 +30,20 @@ to predict whether a patient is likely to have a stroke. The purpose of this exp
 to uncover trends and relationships within the data that may provide insights into stroke prediction.
 """)
 
+st.header('Purpose of Exploration')
+st.write("""
+The purpose of the exploration of the Stroke Prediction Dataset from Kaggle is to delve into the relationships 
+         and trends among various health-related parameters, such as age, glucose levels, BMI, hypertension, and 
+         heart disease, to enhance our understanding and predictive capabilities regarding stroke occurrence. 
+         By analyzing these variables through methods like correlation matrices, we can identify significant 
+         predictors and their interactions, which are crucial for developing robust models for stroke prediction. 
+         This exploration aims to uncover insights that could inform healthcare professionals and researchers 
+         about potential risk factors, ultimately leading to better preventive measures and treatment strategies 
+         tailored to individual risk profiles. This investigation not only aids in the advancement of medical 
+         research but also contributes to the development of targeted interventions that could mitigate the risk 
+         of strokes in vulnerable populations.
+         """)
+
 # Sidebar for navigation
 st.sidebar.header('Chart Selection')
 chart_type = st.sidebar.selectbox(
