@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import statsmodels.api as sm
+from sklearn.preprocessing import StandardScaler
 
 @st.cache_data
 def load_data():
@@ -100,12 +101,17 @@ elif page == "Logistic Regression Analysis":
 
     # Preprocessing for logistic regression
     data = data.dropna(subset=['bmi'])
-    data = pd.get_dummies(data, columns=['gender', 'ever_married', 'work_type', 'Residence_type', 'smoking_status'], drop_first=False)
+    data = pd.get_dummies(data, columns=['gender', 'ever_married', 'work_type', 'Residence_type', 'smoking_status'], drop_first=True)
     data = data.apply(lambda x: x.astype(int) if x.dtype == 'bool' else x)
 
     # Define X and y
     X = data.drop(columns=['id', 'stroke'])
     y = data['stroke']
+
+    # Scale predictors
+    scaler = StandardScaler()
+    X = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
+    X = sm.add_constant(X)  # Add constant after scaling
 
     print(X.dtypes)
 
