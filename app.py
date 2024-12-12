@@ -48,7 +48,7 @@ The purpose of the exploration of the Stroke Prediction Dataset from Kaggle is t
 st.sidebar.header('Chart Selection')
 chart_type = st.sidebar.selectbox(
     "Select the chart you want to view",
-    ("Distributions of Age, Glucose, and BMI", "Box Plots", "Pie Charts", "Correlation Matrix")
+    ("Distributions of Age, Glucose, and BMI", "Box Plots", "Pie Charts", "Correlation Matrix", "Logistic Regression Analysis")
 )
 
 if st.checkbox('Show raw data'):
@@ -536,16 +536,71 @@ elif chart_type == "Pie Charts":
     # Adjust layout
     plt.tight_layout()
     st.pyplot(fig)
+
+    # Logistic Regression Analysis
+elif chart_type == "Logistic Regression Analysis":
+    st.subheader("Logistic Regression Analysis")
+
+    # Add description
+    st.write("""
+    Logistic Regression is a statistical model commonly used for binary classification tasks. 
+    In this dataset, it can be utilized to predict the likelihood of a stroke (1) versus no stroke (0) 
+    based on independent variables such as age, glucose levels, BMI, hypertension, and heart disease.
+    """)
+
+    # Add an illustrative image for Logistic Regression
+    st.image("images/odd_ratios.jpg", caption="Illustration of Odd Ratios for Predictors of Stroke", use_column_width=True)
+
+    st.write("""
+    Age: The odds ratio indicates a strong association between age and stroke. Older individuals are significantly more likely to have a stroke, highlighting age as a critical risk factor.
+    Hypertension and Heart Disease: These conditions have odds ratios above 1, showing that individuals with these conditions are at higher risk of stroke. This aligns with existing medical literature linking hypertension and cardiovascular issues to stroke.
+    \nAverage Glucose Levels: Elevated glucose levels also show a significant association with stroke, possibly reflecting the role of diabetes or prediabetes in stroke risk.
+    \nGender (Male): Males have a slightly higher odds ratio compared to females, which may reflect subtle gender-specific differences in stroke prevalence.
+    \nResidence Type, Smoking Status, and Marital Status: These variables have odds ratios closer to 1, suggesting a weaker direct association with stroke. However, their influence may still be important when combined with other factors.
+    """)
+
+    # Add an illustrative image for Logistic Regression
+    st.image("images/log_res_bmi_age_glucose.jpg", caption="Illustration of Logistic Regression for Age, BMI, Average Glucose Level", use_column_width=True)
+
+    st.write("""
+    Age: The sigmoid curve for age shows a sharp increase in stroke probability as age rises, particularly beyond 50 years. This reinforces the critical role of aging in stroke risk.
+    \nBMI: The relationship between BMI and stroke appears less pronounced, as the sigmoid curve remains relatively flat. This suggests that BMI alone may not be a strong predictor of stroke in this dataset.
+    \nGlucose Levels: Elevated glucose levels show a gradual increase in stroke probability. Individuals with glucose levels above 150 mg/dL appear to have a notably higher risk, emphasizing the importance of monitoring blood sugar levels.
+    """)
+
+    # Add an illustrative image for Logistic Regression
+    st.image("images/log_res_gender.jpg", caption="Illustration of Logistic Regression for Gender", use_column_width=True)
+    st.write("""
+    Male vs. Female: Males have a slightly higher predicted probability of stroke compared to females. While the difference is not large, it suggests potential gender-based disparities in stroke risk, which may warrant further investigation into biological and lifestyle factors.
+    """)
+
+    # Add an illustrative image for Logistic Regression
+    st.image("images/log_res_smoking.jpg", caption="Illustration of Logistic Regression for Smoking Status", use_column_width=True)
+    st.write("""
+    Currently Smoking: Individuals who currently smoke have the highest predicted probability of stroke, followed by those who formerly smoked. This highlights smoking as a significant modifiable risk factor.
+    \nNever Smoked: While this group has the lowest predicted probability, it is not zero, suggesting that other risk factors play a role even in non-smokers.
+    """)
+
+    # Add an illustrative image for Logistic Regression
+    st.image("images/log_res_urban.jpg", caption="Illustration of Logistic Regression for Residence Type", use_column_width=True)
+    st.write("""
+    Urban vs. Rural: Individuals living in rural areas have a higher predicted probability of stroke compared to those in urban areas. This could be linked to differences in healthcare access, awareness, and lifestyle between rural and urban populations.
+    """)
+             
+
+    # Add an illustrative image for Logistic Regression
+    st.image("images/log_res_married.jpg", caption="Illustration of Logistic Regression for Marital Status", use_column_width=True)
+    st.write("""
+    Married vs. Not Married: Individuals who have been married show a higher predicted probability of stroke compared to not married individuals. This could reflect differences in social support systems, stress levels, or lifestyle factors between these groups.
+    """)
+
 # Conclusion Section
 st.header('Conclusion')
 st.write("""
-From the visualizations and descriptive statistics, several trends are noticeable. Age, average glucose levels, 
-    and BMI exhibit diverse distributions, where older age groups and higher glucose levels appear to 
-    correlate with increased stroke incidents. The box plots further elucidate the relationship between these 
-    factors and stroke occurrence, highlighting potential trends that could be instrumental for deeper analysis. 
-    Model-building and further analytical exploration, especially using tools like TensorFlow or other machine 
-    learning libraries, could significantly enhance our understanding of these relationships. Overall, 
-    the data suggests that health conditions such as hypertension and heart health, alongside lifestyle 
-    choices like smoking, are major influencers of stroke risk. However, demographic factors like gender 
-    and marital status also play a role, albeit to a lesser extent.
+The insights from these logistic regression analyses provide valuable information about the predictors of 
+stroke. Key modifiable risk factors like smoking, hypertension, and glucose levels stand out as crucial 
+areas for intervention. Non-modifiable factors such as age, gender, and residence type offer insights 
+into population-level trends, which can help target prevention efforts. These findings align with 
+existing knowledge and underscore the importance of comprehensive health monitoring and tailored 
+interventions for at-risk populations.
 """)
