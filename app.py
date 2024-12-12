@@ -116,7 +116,7 @@ elif page == "Logistic Regression Analysis":
     model = sm.Logit(y, X)
     result = model.fit()
 
-    print(result.summary())
+    # print(result.summary())
 
     # Calculate and filter odds ratios
     odds_ratios = np.exp(result.params)
