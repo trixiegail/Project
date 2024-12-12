@@ -4,7 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import statsmodels.api as sm
-from sklearn.preprocessing import StandardScaler
 
 @st.cache_data
 def load_data():
@@ -101,28 +100,23 @@ elif page == "Logistic Regression Analysis":
 
     # Preprocessing for logistic regression
     data = data.dropna(subset=['bmi'])
-    # One-hot encode with drop_first to avoid multicollinearity
-    data = pd.get_dummies(data, columns=['gender', 'ever_married', 'work_type', 'Residence_type', 'smoking_status'], drop_first=True)
+    data = pd.get_dummies(data, columns=['gender', 'ever_married', 'work_type', 'Residence_type', 'smoking_status'], drop_first=False)
+    data = data.apply(lambda x: x.astype(int) if x.dtype == 'bool' else x)
 
     # Define X and y
     X = data.drop(columns=['id', 'stroke'])
     y = data['stroke']
 
-    # Scale predictors
-    scaler = StandardScaler()
-    X = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
-    X = sm.add_constant(X)  # Add constant after scaling
+    print(X.dtypes)
 
-    # Fit logistic regression model with regularization
+    # Add constant to X
+    X = sm.add_constant(X)
+
+    # Fit logistic regression model
     model = sm.Logit(y, X)
-    try:
-        result = model.fit()
-    except np.linalg.LinAlgError as e:
-        st.error(f"Error fitting model: {e}")
-        result = model.fit_regularized(method='l1', alpha=1.0)  # Try regularized fitting
+    result = model.fit()
 
-    st.write(result.summary())
-
+    print(result.summary())
 
     # Calculate and filter odds ratios
     odds_ratios = np.exp(result.params)
