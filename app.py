@@ -563,7 +563,7 @@ elif chart_type == "Logistic Regression Analysis":
     st.image("images/log_res_bmi_age_glucose.jpg", caption="Illustration of Logistic Regression for Age, BMI, Average Glucose Level", use_column_width=True)
 
     st.write("""
-    Age: The sigmoid curve for age shows a sharp increase in stroke probability as age rises, particularly beyond 50 years. This reinforces the critical role of aging in stroke risk.
+    Age: The curve for age shows a sharp increase in stroke probability as age rises, particularly beyond 50 years. This reinforces the critical role of aging in stroke risk.
     \nBMI: The relationship between BMI and stroke appears less pronounced, as the sigmoid curve remains relatively flat. This suggests that BMI alone may not be a strong predictor of stroke in this dataset.
     \nGlucose Levels: Elevated glucose levels show a gradual increase in stroke probability. Individuals with glucose levels above 150 mg/dL appear to have a notably higher risk, emphasizing the importance of monitoring blood sugar levels.
     """)
