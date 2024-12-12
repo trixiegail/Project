@@ -571,7 +571,7 @@ elif chart_type == "Logistic Regression Analysis":
     # Add an illustrative image for Logistic Regression
     st.image("images/log_res_gender.jpg", caption="Illustration of Logistic Regression for Gender", use_column_width=True)
     st.write("""
-    Male vs. Female: Males have a slightly higher predicted probability of stroke compared to females. While the difference is not large, it suggests potential gender-based disparities in stroke risk, which may warrant further investigation into biological and lifestyle factors.
+    Male vs. Female: Females have a slightly higher predicted probability of stroke compared to males. While the difference is not large, it suggests potential gender-based disparities in stroke risk, which may warrant further investigation into biological and lifestyle factors.
     """)
 
     # Add an illustrative image for Logistic Regression
