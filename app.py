@@ -584,7 +584,7 @@ elif chart_type == "Logistic Regression Analysis":
     # Add an illustrative image for Logistic Regression
     st.image("images/log_res_urban.jpg", caption="Illustration of Logistic Regression for Residence Type", use_column_width=True)
     st.write("""
-    Urban vs. Rural: Individuals living in rural areas have a higher predicted probability of stroke compared to those in urban areas. This could be linked to differences in healthcare access, awareness, and lifestyle between rural and urban populations.
+    Urban vs. Rural: Individuals living in urban areas have a higher predicted probability of stroke compared to those in rural areas. This could be linked to differences in healthcare access, awareness, and lifestyle between rural and urban populations.
     """)
              
 
