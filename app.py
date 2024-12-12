@@ -594,6 +594,25 @@ elif chart_type == "Logistic Regression Analysis":
     Married vs. Not Married: Individuals who have been married show a higher predicted probability of stroke compared to not married individuals. This could reflect differences in social support systems, stress levels, or lifestyle factors between these groups.
     """)
 
+    # Add an illustrative image for Logistic Regression
+    st.image("images/cluster_patient.jpg", caption="Illustration of Logistic Regression for Patients based on Age, BMI, and Average Glucose Level", use_column_width=True)
+    st.write("""
+    The density of patients in the lower glucose range (purple cluster) suggests a significant portion of the population with relatively stable glucose metabolism, potentially at lower stroke risk.
+    The intermediate cluster (yellow) captures patients transitioning into higher risk due to rising glucose levels.
+    The upper cluster (teal) likely represents patients with uncontrolled glucose levels, aligning with chronic conditions like diabetes.
+    \nKey Insight: The clustering strongly reinforces the relationship between glucose levels and metabolic health, with higher glucose levels likely correlating to increased health risks.
+    """)
+
+    # Add an illustrative image for Logistic Regression
+    st.image("images/cluster_age_bmi_glucose.jpg", caption="Illustration of Logistic Regression for Patients based on Age, BMI, and Average Glucose Level", use_column_width=True)
+    st.write("""
+    The purple cluster predominantly represents individuals with lower glucose levels and spans across all age groups, possibly indicating a group with healthier metabolic conditions.
+    The yellow cluster represents individuals with intermediate glucose levels, extending across a broad age range. This could indicate a transitionary group, possibly prediabetic or at moderate risk for stroke.
+    The teal cluster includes individuals with the highest glucose levels. This group is more prevalent in older age ranges, likely reflecting higher metabolic risk factors such as diabetes, which correlate with increased stroke risk.
+    \nKey Insight: Glucose levels vary more significantly with age, especially in the older population, indicating that older age combined with high glucose levels is a critical risk factor for health conditions like stroke.
+    """)
+
+
 # Conclusion Section
 st.header('Conclusion')
 st.write("""
