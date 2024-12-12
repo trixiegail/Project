@@ -101,7 +101,7 @@ elif page == "Logistic Regression Analysis":
 
     # Preprocessing for logistic regression
     data = data.dropna(subset=['bmi'])
-    data = pd.get_dummies(data, columns=['gender', 'ever_married', 'work_type', 'Residence_type', 'smoking_status'], drop_first=True)
+    data = pd.get_dummies(data, columns=['gender', 'ever_married', 'work_type', 'Residence_type', 'smoking_status'], drop_first=False)
     data = data.apply(lambda x: x.astype(int) if x.dtype == 'bool' else x)
 
     # Define X and y
