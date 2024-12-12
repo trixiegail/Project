@@ -4,7 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import statsmodels.api as sm
-from sklearn.preprocessing import StandardScaler
 
 @st.cache_data
 def load_data():
@@ -111,17 +110,10 @@ elif page == "Logistic Regression Analysis":
     print(X.dtypes)
 
     # Add constant to X
-    # Scale predictors
-    scaler = StandardScaler()
-    X = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
-    X = sm.add_constant(X)  # Add constant after scaling
+    X = sm.add_constant(X)
 
     # Fit logistic regression model
     model = sm.Logit(y, X)
-try:
-    result = model.fit()
-except np.linalg.LinAlgError as e:
-    st.error(f"Error fitting model: {e}")
     result = model.fit()
 
     print(result.summary())
