@@ -126,7 +126,7 @@ except np.linalg.LinAlgError as e:
     st.error(f"Error fitting model: {e}")
     result = model.fit_regularized(method='l1', alpha=1.0)
 
-    # print(result.summary())
+    print(result.summary())
 
     # Calculate and filter odds ratios
     odds_ratios = np.exp(result.params)
