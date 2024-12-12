@@ -118,6 +118,10 @@ elif page == "Logistic Regression Analysis":
 
     # Fit logistic regression model
     model = sm.Logit(y, X)
+try:
+    result = model.fit()
+except np.linalg.LinAlgError as e:
+    st.error(f"Error fitting model: {e}")
     result = model.fit()
 
     print(result.summary())
